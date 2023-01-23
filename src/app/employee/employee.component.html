@@ -1,0 +1,105 @@
+<div class="row">
+  <div class="col s12">
+    <div class="card grey darken-4">
+      <div class="card-content white-text">
+        <div class="row">
+          <div class="col s5">
+            <br>
+            <form #employeeForm="ngForm" (ngSubmit)="OnSubmit(employeeForm)" class="form-group">
+
+              <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="employeeService.selectedEmployee._id" />
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">account_circle</i>
+                  <input type="text" name="name" #name="ngModel" [(ngModel)]="employeeService.selectedEmployee.name"
+                    placeholder="Enter Full Name" required />
+                  <label>Full Name :
+                    <label class="red-text">*</label>
+                  </label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">business_center</i>
+                  <input type="text" name="position" #position="ngModel"
+                    [(ngModel)]="employeeService.selectedEmployee.position" placeholder="Enter Position" required />
+                  <label>Position :
+                    <label class="red-text">*</label>
+                  </label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">business</i>
+                  <input type="text" name="office" #office="ngModel"
+                    [(ngModel)]="employeeService.selectedEmployee.office" placeholder="Enter Office" required />
+                  <label>Office :
+                    <label class="red-text">*</label>
+                  </label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">attach_money</i>
+                  <input type="number" name="salary" #salary="ngModel"
+                    [(ngModel)]="employeeService.selectedEmployee.salary" placeholder="Enter Salary" required
+                    value="null" />
+                  <label>Salary :
+                    <label class="red-text">*</label>
+                  </label>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <button id="reset-btn" class="btn waves-effect waves-light center" type="button"
+                    (click)="resetForm(employeeForm)" name="action">
+                    Reset
+                    <i class="material-icons right">sync</i>
+                  </button>
+                  <button class="btn waves-effect waves-light right" type="submit" [disabled]="!employeeForm.valid">
+                    Submit
+                    <i class="material-icons right">send</i>
+                  </button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+
+          <div class="col s7">
+            <table class="highlight centered responsive-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Postion</th>
+                  <th>Office</th>
+                  <th>Salary</th>
+                  <th></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let emp of employeeService.employeesArray">
+                  <td>{{emp.name}}</td>
+                  <td>{{emp.position}}</td>
+                  <td>{{emp.office}}</td>
+                  <td>{{emp.salary}}</td>
+                  <td><a id="edit-btn" class="btn-flat waves-effect waves-green btn-small" (click)="onEdit(emp)"><i
+                        class="material-icons">edit</i></a></td>
+                  <td><a id="delete-btn" class="btn-flat waves-effect waves-red  btn-small"
+                      (click)="onDelete(emp._id,employeeForm)"><i class="material-icons">delete</i></a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
